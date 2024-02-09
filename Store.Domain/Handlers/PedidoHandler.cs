@@ -46,10 +46,14 @@ namespace Store.Domain.Handlers
             var desconto = _descontoRepository.ObterDesconto(command.PromoCode);
 
             //4. Gera o pedido
+            if (command.Items.Count == 0)
+                return new CommandGenericoResult(false, "Falha ao gerar o pedido", Notifications);
+
             var produtos = _produtoRepository.ObterProdutos(ExtrariGuids.Extrair(command.Items)).ToList();
             var pedido = new Pedido(cliente, taxaEntrega, desconto);
             foreach(var item in command.Items)
             {
+                item.Produto = produtos.Select(x => x.Id).FirstOrDefault();
                 var produto = produtos.Where(x => x.Id == item.Produto).FirstOrDefault();
                 pedido.AddItem(produto, item.Quantidade);
             }

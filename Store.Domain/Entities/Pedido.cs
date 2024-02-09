@@ -35,6 +35,7 @@ namespace Store.Domain.Entities
             var item = new ItemPedido(produto, quantidade);
             if (item.IsValid)
                 Items.Add(item);
+            AddNotifications(item);
         }
 
         public decimal Total()

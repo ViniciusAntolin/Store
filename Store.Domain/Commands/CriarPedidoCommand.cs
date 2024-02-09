@@ -25,8 +25,8 @@ namespace Store.Domain.Commands
         {
             AddNotifications(new Contract<CriarPedidoCommand>()
                 .Requires()
-                .IsGreaterThan(Cliente.Length, 11, "Cliente", "Cliente inválido")
-                .IsGreaterThan(CEP.Length, 8, "CEP", "CEP inválido"));
+                .IsGreaterOrEqualsThan(Cliente.Length, 11, "Cliente", "Cliente inválido")
+                .IsGreaterOrEqualsThan(CEP.Length, 8, "CEP", "CEP inválido"));
         }
     }
 }
