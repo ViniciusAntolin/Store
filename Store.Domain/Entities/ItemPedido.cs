@@ -11,6 +11,7 @@ namespace Store.Store.Domain.Entities
                 .Requires()
                 .IsNotNull(produto, "ItemPedido.produto", "Produto invalido.")
                 .IsGreaterThan(quantidade, 0, "ItemPedido.quantidade", "A quantidade deve ser maior que 0."));
+
             Produto = produto;
             Preco = produto != null ? produto.Preco : 0;
             Quantidade = quantidade;
